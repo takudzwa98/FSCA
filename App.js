@@ -1,71 +1,96 @@
-//import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet,FlatList} from 'react-native';
+import React from 'react';
+import { Platform, StyleSheet, Text, View, FlatList } from 'react-native';
 import Header from './components/Header';
 import InputBar from './components/InputBar';
-import TodoItem from './components/TodoItem';
-// create a component
-class App extends Component {
-  constructor(){
+import NotepadItem from './components/Notepaditem';
+
+export default class App extends React.Component {
+  constructor () {
     super();
+
     this.state = {
-      todoInput:'',
+      notepadInput: '',
       todos: [
-        {id: 0, title: 'Take out The trash', done: false},
-        {id: 1, title: 'Make Dineer', done: false}
+        { id: 0, title: 'Welcome', done: false },
+        { id: 1, title: 'Add your Song', done: false }
       ]
     }
   }
-  addNewTodo(){
-    let todos = this.state.todos
+
+  addNewTodo () {
+    let todos = this.state.todos;
+
     todos.unshift({
-      id: todos.length +1,
-      todo: this.state.todoInput,
+      id: todos.length + 1,
+      title: this.state.notepadInput,
       done: false
     });
+
     this.setState({
-      todos,
-      todoInput:''
+      todos: todos,
+      notepadInput: ''
     });
   }
-  
+
+  toggleDone (item) {
+    let todos = this.state.todos;
+
+    todos = todos.map((todo) => {
+      if (todo.id == item.id) {
+        todo.done = !todo.done;
+      }
+
+      return todo;
+    })
+
+    this.setState({todos});
+  }
+
+  removeTodo (item) {
+    let todos = this.state.todos;
+
+    todos = todos.filter((todo) => todo.id !== item.id);
+
+    this.setState({todos});
+  }
+
   render() {
-    //condition to check what platform 
-    const statusbar = (Platform.OS == 'ios') ?    <View style={styles.statusbar}></View> : <View></View>;
+    const statusbar = (Platform.OS == 'ios') ? <View style={styles.statusbar}></View> : <View></View>;
+
     return (
       <View style={styles.container}>
-      {statusbar}
-      <Header title="Taks App" />
+        {statusbar}
 
-     <InputBar 
-     textChange ={todoInput => this.setState({todoInput})}
-     addNewTodo={() => this.addNewTodo()}
-      />
-  <FlatList
-  data={this.state.todos}
-  keyExtractor={(item, index) => index.toString()}
-  renderItem={({item, index}) => {
-    return (
-      <TodoItem todoItem={item}/>
-    )
-  }} 
-  />
+        <Header title="Notepad" />
+
+        <InputBar
+          addNewTodo={() => this.addNewTodo()}
+          textChange={notepadInput => this.setState({ notepadInput })}
+          notepadInput={this.state.notepadInput}
+        />
+
+        <FlatList
+          data={this.state.todos}
+          extraData={this.state}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({item, index}) => {
+            return (
+              <NotepadItem notepadItem={item} toggleDone={() => this.toggleDone(item)} removeTodo={() => this.removeTodo(item)} />
+            )
+          }}
+        />
       </View>
     );
   }
 }
 
-// define your styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
   statusbar: {
-    backgroundColor: '#00a8ff',
-    height: 40
+    backgroundColor: '#FFCE00',
+    height: 20
   }
 });
-
-//make this component available to the app
-export default App;
