@@ -12,8 +12,8 @@ export default class App extends React.Component {
     this.state = {
       notesInput: '',
       notes: [
-        { id: 0, title: 'Take out the trash', done: false },
-        { id: 1, title: 'Cook dinner', done: false }
+        { id: 0, title: 'Add New Notes', done: false }
+        
       ]
     }
   }
