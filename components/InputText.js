@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   addButton: {
     width: 100,
-    backgroundColor: '#FFCE00',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center'
   },

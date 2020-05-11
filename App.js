@@ -1,7 +1,7 @@
 import React from 'react';
 import { Platform, StyleSheet, Text, View, FlatList } from 'react-native';
 import Header from './components/Header';
-import InputBar from './components/InputBar';
+import InputBar from './components/InputText';
 import NotepadItem from './components/Notepaditem';
 
 export default class App extends React.Component {
@@ -87,10 +87,10 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f5f6fa',
   },
   statusbar: {
-    backgroundColor: '#FFCE00',
-    height: 20
+    backgroundColor: '#f5f6fa',
+    height: 60
   }
 });

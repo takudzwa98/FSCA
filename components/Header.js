@@ -11,17 +11,18 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#171717',
-    height: 80,
+    backgroundColor: '#FFF',
+    height: 90,
     alignItems: 'center',
     justifyContent: 'center'
   },
   title: {
-    color: '#F3F3F3',
+    color: '#000',
     fontSize: 60,
     fontWeight: '900',
     textTransform: 'uppercase'
   }
+  
 });
 
 export default Header;
