@@ -1,85 +1,104 @@
+ 
 import React from 'react';
-import { Platform, StyleSheet, Text, View, FlatList } from 'react-native';
+import { Platform, StyleSheet, Text, View, FlatList,Image } from 'react-native';
 import Header from './components/Header';
 import InputBar from './components/InputText';
-import NotepadItem from './components/Notepaditem';
-
+import TodoItem from './components/Notepaditem';
+import Footer from './components/Footer';
 export default class App extends React.Component {
   constructor () {
     super();
 
     this.state = {
-      notepadInput: '',
-      todos: [
-        { id: 0, title: 'Welcome', done: false },
-        { id: 1, title: 'Add your Song', done: false }
+      notesInput: '',
+      notes: [
+        { id: 0, title: 'Take out the trash', done: false },
+        { id: 1, title: 'Cook dinner', done: false }
       ]
     }
   }
 
-  addNewTodo () {
-    let todos = this.state.todos;
+  addNewNote () {
+    let notes = this.state.notes;
 
-    todos.unshift({
-      id: todos.length + 1,
-      title: this.state.notepadInput,
+    notes.unshift({
+      id: notes.length + 1,
+      title: this.state.notesInput,
       done: false
     });
 
     this.setState({
-      todos: todos,
-      notepadInput: ''
+      notes: notes,
+      notesInput: ''
     });
   }
 
   toggleDone (item) {
-    let todos = this.state.todos;
+    let notes = this.state.notes;
 
-    todos = todos.map((todo) => {
-      if (todo.id == item.id) {
-        todo.done = !todo.done;
+    notes = notes.map((note) => {
+      if (note.id == item.id) {
+        note.done = !note.done;
       }
 
-      return todo;
+      return note;
     })
 
-    this.setState({todos});
+    this.setState({notes});
   }
 
   removeTodo (item) {
-    let todos = this.state.todos;
+    let notes = this.state.notes;
 
-    todos = todos.filter((todo) => todo.id !== item.id);
+    notes = notes.filter((note) => note.id !== item.id);
 
-    this.setState({todos});
+    this.setState({notes});
   }
-
+  render() {
+    return(
+      <View style={styles.container}>           
+ <Image
+ source={require('./assets/Iconh.png')}
+ style={styles.Image}
+ />
+</View>
+    );
+  }
   render() {
     const statusbar = (Platform.OS == 'ios') ? <View style={styles.statusbar}></View> : <View></View>;
 
     return (
       <View style={styles.container}>
         {statusbar}
+          
+ <Image
+ source={require('./assets/Iconh.png')}
+ style={styles.Image}
+ />
 
-        <Header title="Notepad" />
+        <Header title="NotePad" />
 
         <InputBar
-          addNewTodo={() => this.addNewTodo()}
-          textChange={notepadInput => this.setState({ notepadInput })}
-          notepadInput={this.state.notepadInput}
+          addNewNote={() => this.addNewNote()}
+          textChange={notesInput => this.setState({ notesInput })}
+          notesInput={this.state.notesInput}
         />
 
         <FlatList
-          data={this.state.todos}
+          data={this.state.notes}
           extraData={this.state}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({item, index}) => {
             return (
-              <NotepadItem notepadItem={item} toggleDone={() => this.toggleDone(item)} removeTodo={() => this.removeTodo(item)} />
+              <TodoItem  todoItem={item} toggleDone={() => this.toggleDone(item)} removeTodo={() => this.removeTodo(item)} />
             )
           }}
         />
+
+         <Footer/>
       </View>
+     
+      
     );
   }
 }
@@ -87,10 +106,18 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f6fa',
+    backgroundColor: '#fff',
+    alignItems: 'center'
+   
+    
   },
+  image: {
+    alignItems:'center'
+    
+   },
+   
   statusbar: {
-    backgroundColor: '#f5f6fa',
-    height: 60
+    backgroundColor: '#FFCE00',
+    height: 40
   }
 });

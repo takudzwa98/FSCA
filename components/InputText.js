@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
@@ -7,12 +6,15 @@ const InputBar = (props) => {
     <View style={styles.inputContainer}>
       <TextInput
         style={styles.input}
-        onChangeText={(notepadInput) => props.textChange(notepadInput)}
-        value={props.notepadInput}
+        onChangeText={(todoInput) => props.textChange(todoInput)}
+        value={props.todoInput}
       />
-      <TouchableOpacity style={styles.addButton} onPress={props.addNewTodo}>
-        <Text style={styles.addButtonText}>ADD</Text>
+    
+      <TouchableOpacity style={styles.addButton} onPress={props.addNewNote}>
+        <Text style={styles.addButtonText}>NOTE</Text>
       </TouchableOpacity>
+     
+ 
     </View>
   )
 }
@@ -24,18 +26,25 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 3 },
     shadowColor: '#171717',
     shadowOpacity: .1
+    
   },
   input: {
-    backgroundColor: '#F3F3F3',
+    backgroundColor: '#FFF',
     flex: 1,
-    fontSize: 18,
-    height: 35
+    fontSize: 30,
+    height: 55,
+    shadowOffset: { width: 0, height: 1 },
+    shadowColor: '#171717',
+    shadowOpacity: 1,
   },
   addButton: {
     width: 100,
-    backgroundColor: '#FFF',
+    backgroundColor: '#00a8ff',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    shadowOffset: { width: 0, height: 1 },
+    shadowColor: '#171717',
+    shadowOpacity: 1,
   },
   addButtonText: {
     color: '#171717',
@@ -45,4 +54,3 @@ const styles = StyleSheet.create({
 })
 
 export default InputBar;
-

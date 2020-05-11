@@ -1,27 +1,29 @@
 import React from 'react';
-import { StyleSheet, Text, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, Button, TouchableOpacity, View } from 'react-native';
 
-export default class NotepadItem extends React.Component {
+export default class TodoItem extends React.Component {
   constructor (props) {
     super(props);
   }
 
   render () {
-    const notepadItem = this.props.notepadItem;
+    const todoItem = this.props.todoItem;
 
     return (
       <TouchableOpacity
-        style={styles.notepadItem}
+        style={styles.todoItem}
         onPress={() => this.props.toggleDone()}
       >
-        <Text style={(notepadItem.done) ? { color: '#AAAAAA' } : { color: '#313131' }}>
-          { notepadItem.title }
+    
+        <Text style={(todoItem.done) ? { color: '#AAAAAA' } : { color: '#313131' }}>
+          { todoItem.title }
         </Text>
 
         <Button
           title="X"
-          color={(notepadItem.done) ? 'rgba(200, 0, 0, 0.5)' : 'rgba(255, 0, 0, 1)' }
+          color={(todoItem.done) ? 'rgba(200, 0, 0, 0.5)' : 'rgba(255, 0, 0, 1)' }
           onPress={() => this.props.removeTodo()}
+          
         />
       </TouchableOpacity>
     )
@@ -29,14 +31,17 @@ export default class NotepadItem extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  notepadItem: {
+  todoItem: {
     width: '100%',
     height: 40,
-    borderBottomColor: '#DDD',
+    borderBottomColor: '#000',
     borderBottomWidth: 1,
     flexDirection: 'row',
+    alignContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingLeft: 15
+    justifyContent: 'space-evenly',
+    paddingLeft: 40,
+    backgroundColor: '#FFF',
+    color: '#000'
   }
 })
