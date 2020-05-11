@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     paddingLeft: 40,
     backgroundColor: '#FFF',
-    color: '#000'
+    color: '#000',
+    
   }
 })
